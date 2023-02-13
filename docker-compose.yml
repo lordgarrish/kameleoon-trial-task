@@ -1,0 +1,7 @@
+version: "3"
+services:
+  quote-api:
+    build: .
+    container_name: quote-api
+    ports:
+      - "8080:8080"
