@@ -96,11 +96,11 @@ For launching this app inside Docker container go to project root folder and ent
 ```
 docker compose up
 ```
-Get an image from [DockerHub](https://hub.docker.com/r/lordgarrish/kameleoon-trial-task-quote-api):  
+OR get an image from [DockerHub](https://hub.docker.com/r/lordgarrish/kameleoon-trial-task-quote-api):  
 ```
 docker pull lordgarrish/kameleoon-trial-task-quote-api
 ```
-Run:
+Run Docker container:
 ```
 docker run -p 8080:8080 --name quote-api lordgarrish/kameleoon-trial-task-quote-api
 ```
