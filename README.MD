@@ -1,5 +1,7 @@
 ## Kameleoon Trial Task
 ### Description
+https://developers.kameleoon.com/back-end-trial-task.html  
+
 You should implement a REST API for the web interface in the two wireframes below.
 
 ![wireframe 1](https://developers.kameleoon.com/images/quote-list.png)
@@ -29,7 +31,7 @@ important, but can come later :-).
 The full exercise can take about 6-8 hours (for a middle-level developer; longer for a junior) but the goal is not 
 necessarily to do everything. You need to show your development skills, respect of best practices, understanding of the 
 web development model (client, server), ability to deliver your work to a production-like environment, and your productivity.  
-### Endpoints
+### Requests examples
 Create user account:
 ```
 POST /api/users
@@ -74,13 +76,17 @@ DELETE /api/quotes/{QUOTE_ID}
 ```
 Upvote or downvote:
 ```
-POST /api/quotes/{QUOTE_ID}/vote?userId={VOTER_ID}&upvote={TRUE_IF_UPVOTE_OTHERWISE_FALSE}
+POST /api/quotes/{QUOTE_ID}?userId={VOTER_ID}&vote={TRUE_IF_UPVOTE_OTHERWISE_FALSE}
 ```
 View of the top and worse 10 quotes:
 ```
 GET /api/quotes?best
 
 GET /api/quotes?worst
+```
+Full OpenAPI documentation available at:
+```
+http://localhost:8080/swagger-ui.html
 ```
 ### Build and usage
 Build project using Maven:
@@ -100,7 +106,7 @@ OR get an image from [DockerHub](https://hub.docker.com/r/lordgarrish/kameleoon-
 ```
 docker pull lordgarrish/kameleoon-trial-task-quote-api
 ```
-Run Docker container:
+Run image:
 ```
 docker run -p 8080:8080 --name quote-api lordgarrish/kameleoon-trial-task-quote-api
 ```
