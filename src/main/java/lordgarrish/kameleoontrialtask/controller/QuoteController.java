@@ -25,7 +25,7 @@ public class QuoteController {
         try {
             return new ResponseEntity<>(quoteService.save(quote, userId), HttpStatus.CREATED);
         } catch (UserNotFoundException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -66,7 +66,7 @@ public class QuoteController {
         try {
             return new ResponseEntity<>(quoteService.modify(quoteId, quote), HttpStatus.OK);
         } catch (QuoteNotFoundException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -76,13 +76,13 @@ public class QuoteController {
         quoteService.delete(quoteId);
     }
 
-    @PostMapping("/{quoteId}/vote")
+    @PostMapping(path="/{quoteId}")
     public ResponseEntity<QuoteDTO> voteOnQuote(@PathVariable Long quoteId, @RequestParam Long userId,
-                                                @RequestParam boolean upvote) {
+                                                @RequestParam boolean vote) {
         try {
-            return new ResponseEntity<>(quoteService.vote(quoteId, userId, upvote), HttpStatus.OK);
+            return new ResponseEntity<>(quoteService.vote(quoteId, userId, vote), HttpStatus.OK);
         } catch (QuoteNotFoundException | UserNotFoundException e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
