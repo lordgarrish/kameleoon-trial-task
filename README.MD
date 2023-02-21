@@ -78,9 +78,9 @@ POST /api/quotes/{QUOTE_ID}/vote?userId={VOTER_ID}&upvote={TRUE_IF_UPVOTE_OTHERW
 ```
 View of the top and worse 10 quotes:
 ```
-GET /api/quotes/top10
+GET /api/quotes?best
 
-GET /api/quotes/bottom10
+GET /api/quotes?worst
 ```
 ### Build and usage
 Build project using Maven:
