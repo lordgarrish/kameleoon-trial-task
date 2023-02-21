@@ -6,6 +6,8 @@ import lordgarrish.kameleoontrialtask.exception.QuoteNotFoundException;
 import lordgarrish.kameleoontrialtask.exception.UserNotFoundException;
 import lordgarrish.kameleoontrialtask.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -84,13 +86,15 @@ public class QuoteController {
         }
     }
 
-    @GetMapping("/top10")
+    @GetMapping(params="best")
     public ResponseEntity<List<QuoteDTO>> getTopTenQuotes() {
-        return new ResponseEntity<>(quoteService.getTopTen(), HttpStatus.OK);
+        PageRequest page = PageRequest.of(0, 10, Sort.by("score").descending());
+        return new ResponseEntity<>(quoteService.getTen(page), HttpStatus.OK);
     }
 
-    @GetMapping("/bottom10")
+    @GetMapping(params="worst")
     public ResponseEntity<List<QuoteDTO>> getBottomTenQuotes() {
-        return new ResponseEntity<>(quoteService.getBottomTen(), HttpStatus.OK);
+        PageRequest page = PageRequest.of(0, 10, Sort.by("score"));
+        return new ResponseEntity<>(quoteService.getTen(page), HttpStatus.OK);
     }
 }

@@ -10,6 +10,7 @@ import lordgarrish.kameleoontrialtask.repository.QuoteRepository;
 import lordgarrish.kameleoontrialtask.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -104,18 +105,8 @@ public class QuoteService {
         return QuoteDTO.toDto(quoteRepository.save(quote));
     }
 
-    public List<QuoteDTO> getTopTen() {
-        return quoteRepository.findAll().stream()
-                .sorted(Comparator.comparingInt(Quote::getScore).reversed())
-                .limit(10)
-                .map(QuoteDTO::toDto)
-                .toList();
-    }
-
-    public List<QuoteDTO> getBottomTen() {
-        return quoteRepository.findAll().stream()
-                .sorted(Comparator.comparingInt(Quote::getScore))
-                .limit(10)
+    public List<QuoteDTO> getTen(PageRequest page) {
+        return quoteRepository.findAll(page).getContent().stream()
                 .map(QuoteDTO::toDto)
                 .toList();
     }
